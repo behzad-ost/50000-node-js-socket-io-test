@@ -1,2 +1,14 @@
 this was just a quick test to get some real-world numbers since we all
 know that benchmarks usually don't parallel real world too well.
+
+What is this test?
+
+Basically when you are developing an application that needs to keep a long-polling connection open to a browser, there are a few technologies that are needed. We're doing more than just serving a static page, our webserver needs to keep a connection open to that browser so that it can push or receive data from that connected browser at any time.
+
+Because of this, the server doesn't just serve 50000 pages and call it a day, it actually has to keep those connections open and alive which is much more difficult.
+
+This particular solution uses node.js and socket.io and communicates a counter back with the number of connections and alters the background color of the page based on the number of connections. The counter updates, but, the color changing is a good visual indication that something happened.
+
+My theory is that at roughly 22k connections of real world traffic, we'll run into a situation where the tcp buffers in the kernel start to churn which is what I'm looking to test. In the lab, with connections coming from a dozen machines, I tested this up to 77k connections with no problem, but, the real world, with multiple IPs coming in from all over the place add some complexity.
+
+Thank you for participating, I appreciate it.
